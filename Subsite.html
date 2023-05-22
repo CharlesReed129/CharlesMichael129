@@ -12,5 +12,51 @@
   <ul>
     <li><a href="index.html">Go to Homepage</a></li>
   </ul>
+
+  <h2>8-Bit Game</h2>
+  <canvas id="gameCanvas" width="320" height="240"></canvas>
+
+  <script>
+    // Get the game canvas
+    const canvas = document.getElementById('gameCanvas');
+    const context = canvas.getContext('2d');
+
+    // Set up game variables
+    let playerX = 150;
+    let playerY = 100;
+
+    // Update game logic
+    function updateGame() {
+      // Clear the canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the player
+      context.fillStyle = '#FF0000'; // Red
+      context.fillRect(playerX, playerY, 20, 20);
+
+      // Repeat the update at 60 frames per second
+      requestAnimationFrame(updateGame);
+    }
+
+    // Handle key presses
+    function handleKeyPress(event) {
+      const key = event.key;
+      if (key === 'ArrowUp' && playerY > 0) {
+        playerY -= 10;
+      } else if (key === 'ArrowDown' && playerY < canvas.height - 20) {
+        playerY += 10;
+      } else if (key === 'ArrowLeft' && playerX > 0) {
+        playerX -= 10;
+      } else if (key === 'ArrowRight' && playerX < canvas.width - 20) {
+        playerX += 10;
+      }
+    }
+
+    // Add event listener for key presses
+    document.addEventListener('keydown', handleKeyPress);
+
+    // Start the game loop
+    updateGame();
+  </script>
 </body>
 </html>
